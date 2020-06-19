@@ -38,6 +38,7 @@ struct InstructionView: View {
                 }
                 
             }
+            .listRowInsets(EdgeInsets())
             
             VStack(alignment: .leading){
                 
@@ -61,14 +62,17 @@ struct InstructionView: View {
                 
                 
                 
-            }.padding()
+                }.padding()
+            .listRowInsets(EdgeInsets())
             
             
             
             VStack(alignment: .leading) {
                 
                 Text("Ingredients")
-                    .padding()
+                    .padding(.leading)
+                    .font(.headline)
+ 
                 
                 ScrollView(.horizontal, showsIndicators: false){
                     HStack {
@@ -77,24 +81,46 @@ struct InstructionView: View {
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame( height: 50)
-                            Text(String(i))
+                                .padding(.horizontal)
+                            .shadow(radius: 5)
+                            
                         }
                     }.padding()
                 }
-            }.listRowInsets(EdgeInsets())
-            
-
-            
-            VStack(alignment: .center){
+           
+    
                 
                 HStack {
                     Spacer()
                     QuickInfoCard(servings: R.servings!, preparationMinutes: R.preparationMinutes!, cookingMinutes: R.cookingMinutes!, likeCount: R.likeCount!)
                         .shadow(radius: 10)
                     Spacer()
-                }
+                }.padding(.top)
             }
-            .padding(.top, 15)
+            .padding(.top)
+            .padding(.bottom, 50)
+            .listRowInsets(EdgeInsets())
+            
+            
+            
+            VStack(alignment: .leading, spacing: 3.0){
+                Text("Instructions")
+                    .font(.headline)
+                
+                Spacer()
+                
+                Text(R.instructions!)
+                    .lineSpacing(1.7)
+                    .font(.footnote)
+                
+                
+                
+            }.listRowInsets(EdgeInsets())
+                .padding(.horizontal)
+                .padding(.bottom)
+            
+            
+            
             
             
             

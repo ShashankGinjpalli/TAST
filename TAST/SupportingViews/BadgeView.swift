@@ -18,6 +18,8 @@ struct BadgeView: View {
             .frame(height:50)
             .cornerRadius(90)
             .shadow(radius: 5)
+            .padding(.vertical, 10)
+            .padding(.leading, 10)
     }
 }
 
