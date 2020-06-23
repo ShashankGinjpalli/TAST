@@ -17,6 +17,7 @@ class Recipe{
     
     var title: String?
     var imageUrl: String?
+    var recipeImage: Data?
     var sourceName: String?
     var instructions: String?
     
@@ -54,6 +55,7 @@ class ingredient{
     var imageString: String?
     var ingredientName: String?
     var aisle: String?
+    var ingredientImage: Data?
     
     init(iS: String, iN: String, aisle: String){
         self.imageString = iS

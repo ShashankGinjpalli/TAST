@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import URLImage
 
 struct HomeView: View {
     
@@ -20,43 +21,35 @@ struct HomeView: View {
                 Text("Featured")
                     .font(.headline)
                     .padding()
+
                 
                 
                 HStack {
                     Spacer()
-                    Image("Logo")
+                    Image(uiImage: ((UIImage(data: Data())) ?? UIImage(named: "Logo"))!)
                     .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .shadow(radius: 10)
-                        .cornerRadius(15)
+                    .shadow(radius: 10)
+                     .cornerRadius(15)
                         
+                        
+                    
                     Spacer()
                 }
                 .padding(.horizontal, 25)
                 .padding(.bottom, 25)
                 
-                            
+
                 
-               Text("Recent Recipes")
-                .font(.headline)
-                .padding()
+                Text("Recent Recipes")
+                    .font(.headline)
+                    .padding()
                 
                 Spacer()
-               
-                
-                
-            
                     
-    
-                    
+                
             }.navigationBarTitle(Text("Home"))
-            
-            
-            
-            
-          
-            
-            
+        
         }
     }
 }

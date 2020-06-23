@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,6 +11,7 @@
 		4D11F882249B055600BC4B6D /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D11F881249B055600BC4B6D /* BadgeView.swift */; };
 		4D3C98E7249D93D70015B32C /* FeaturedRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3C98E6249D93D70015B32C /* FeaturedRecipe.swift */; };
 		4D3C98E9249D97350015B32C /* RecentRecipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3C98E8249D97340015B32C /* RecentRecipes.swift */; };
+		4D55145624A2AD5D00B53AA4 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 4D55145524A2AD5D00B53AA4 /* URLImage */; };
 		4D5ED42A249BF46500BD1EB8 /* QuickInfoCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5ED429249BF46500BD1EB8 /* QuickInfoCard.swift */; };
 		4DECD4A7249ACA3C009AF638 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DECD4A6249ACA3C009AF638 /* AppDelegate.swift */; };
 		4DECD4A9249ACA3C009AF638 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DECD4A8249ACA3C009AF638 /* SceneDelegate.swift */; };
@@ -45,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D55145624A2AD5D00B53AA4 /* URLImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,6 +138,9 @@
 			dependencies = (
 			);
 			name = TAST;
+			packageProductDependencies = (
+				4D55145524A2AD5D00B53AA4 /* URLImage */,
+			);
 			productName = TAST;
 			productReference = 4DECD4A3249ACA3C009AF638 /* TAST.app */;
 			productType = "com.apple.product-type.application";
@@ -164,6 +169,9 @@
 				Base,
 			);
 			mainGroup = 4DECD49A249ACA3C009AF638;
+			packageReferences = (
+				4D55145424A2AD5C00B53AA4 /* XCRemoteSwiftPackageReference "url-image" */,
+			);
 			productRefGroup = 4DECD4A4249ACA3C009AF638 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -394,6 +402,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4D55145424A2AD5C00B53AA4 /* XCRemoteSwiftPackageReference "url-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dmytro-anokhin/url-image.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.15;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4D55145524A2AD5D00B53AA4 /* URLImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4D55145424A2AD5C00B53AA4 /* XCRemoteSwiftPackageReference "url-image" */;
+			productName = URLImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		4DECD4AA249ACA3C009AF638 /* TAST.xcdatamodeld */ = {
