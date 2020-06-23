@@ -10,10 +10,9 @@ import SwiftUI
 
 struct QuickInfoCard: View {
     
-    var servings:Int
-    var preparationMinutes:Int
-    var cookingMinutes:Int
-    var likeCount:Int
+    var servings:String
+    var readyIn: String
+    var likeCount:String
     
     
     var body: some View {
@@ -32,7 +31,7 @@ struct QuickInfoCard: View {
                         Text(" 🍚 \(self.servings)")
                             .foregroundColor(Color.green)
                         
-                        Text(" ⏲ \(self.preparationMinutes + self.cookingMinutes)")
+                        Text(" ⏲ \(self.readyIn)")
                             .foregroundColor(Color.green)
                         Text(" 👍 \(self.likeCount)")
                             .foregroundColor(Color.green)
@@ -62,6 +61,6 @@ struct QuickInfoCard: View {
 
 struct QuickInfoCard_Previews: PreviewProvider {
     static var previews: some View {
-        QuickInfoCard(servings: 8, preparationMinutes: 25, cookingMinutes: 50, likeCount: 47829)
+        QuickInfoCard(servings: "8", readyIn: "75", likeCount: "47829")
     }
 }

@@ -12,7 +12,7 @@ struct InstructionView: View {
     
     
     
-    var R = Recipe(servings: 8, preparationMinutes: 15, cookingMinutes: 25, likeCount: 723489, title: "Nachos", imageUrl: "https://spoonacular.com/recipeImages/char-grilled-beef-tenderloin-with-three-herb-chimichurri-156992.jpg", sourceName: "Buzzfeed", instructions: "PreparationFor spice rub: Combine all ingredients in small bowl. Do ahead: Can be made 2 days ahead. Store airtight at room temperature. For chimichurri sauce: Combine first 8 ingredients in blender; blend until almost smooth. Add 1/4 of parsley, 1/4 of cilantro, and 1/4 of mint; blend until incorporated. Add remaining herbs in 3 more additions, pureeing until almost smooth after each addition. Do ahead: Can be made 3 hours ahead. Cover; chill. For beef tenderloin: Let beef stand at room temperature 1 hour. Prepare barbecue (high heat). Pat beef dry with paper towels; brush with oil. Sprinkle all over with spice rub, using all of mixture (coating will be thick). Place beef on grill; sear 2 minutes on each side. Reduce heat to medium-high. Grill uncovered until instant-read thermometer inserted into thickest part of beef registers 130F for medium-rare, moving beef to cooler part of grill as needed to prevent burning, and turning occasionally, about 40 minutes. Transfer to platter; cover loosely with foil and let rest 15 minutes. Thinly slice beef crosswise. Serve with chimichurri sauce. *Available at specialty foods stores and from tienda.com", vegetarian: true, vegan: true)
+    var R = Recipe(servings: "8", readyIn: "25", likeCount: "723489", title: "Nachos", imageUrl: "https://spoonacular.com/recipeImages/char-grilled-beef-tenderloin-with-three-herb-chimichurri-156992.jpg", sourceName: "Buzzfeed", instructions: "Roasted Broccoli with Lemon and Garlic might be just the side dish you are searching for. One serving contains <b>58 calories</b>, <b>3g of protein</b>, and <b>2g of fat</b>. For <b>30 cents per serving</b>, this recipe <b>covers 14%</b> of your daily requirements of vitamins and minerals. Not a lot of people made this recipe, and 4 would say it hit the spot. Head to the store and pick up salt, ground pepper, garlic, and a few other things to make it today. From preparation to the plate, this recipe takes roughly <b>45 minutes</b>. It is a good option if you're following a <b>caveman, gluten free, primal, and whole 30</b> diet. All things considered, we decided this recipe <b>deserves a spoonacular score of 94%</b>. This score is great. Try <a href=\"https://spoonacular.com/recipes/roasted-broccoli-with-garlic-and-lemon-29354\">Roasted Broccoli With Garlic And Lemon</a>, <a href=\"https://spoonacular.com/recipes/roasted-broccoli-with-garlic-and-lemon-706892\">Roasted Broccoli with Garlic and Lemon</a>, and <a href=\"https://spoonacular.com/recipes/roasted-garlic-lemon-broccoli-110090\">Roasted Garlic Lemon Broccoli</a> for similar recipes.", vegetarian: true, vegan: true)
     
     
     
@@ -44,9 +44,12 @@ struct InstructionView: View {
                 
                 Text(R.title!)
                     .font(.title)
+                    
+                    
                 
                 
                 Text("by \(R.sourceName!)")
+                    .fontWeight(.light)
                 
                 
                 HStack{
@@ -92,7 +95,7 @@ struct InstructionView: View {
                 
                 HStack {
                     Spacer()
-                    QuickInfoCard(servings: R.servings!, preparationMinutes: R.preparationMinutes!, cookingMinutes: R.cookingMinutes!, likeCount: R.likeCount!)
+                    QuickInfoCard(servings: R.servings!, readyIn: R.readyIn! , likeCount: R.likeCount!)
                         .shadow(radius: 10)
                     Spacer()
                 }.padding(.top)
@@ -108,6 +111,8 @@ struct InstructionView: View {
                     .font(.headline)
                 
                 Spacer()
+                
+               
                 
                 Text(R.instructions!)
                     .lineSpacing(1.7)

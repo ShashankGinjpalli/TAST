@@ -10,10 +10,9 @@ import Foundation
 
 
 class Recipe{
-    var servings: Int?
-    var preparationMinutes: Int?
-    var cookingMinutes: Int?
-    var likeCount: Int?
+    var servings: String?
+    var readyIn: String?
+    var likeCount: String?
     
     
     var title: String?
@@ -26,11 +25,11 @@ class Recipe{
     
     var ingredientList:[ingredient] = []
     
+    init(){}
     
-    init(servings: Int, preparationMinutes: Int, cookingMinutes: Int, likeCount: Int, title: String, imageUrl: String, sourceName: String, instructions: String, vegetarian: Bool, vegan: Bool){
+    init(servings: String, readyIn: String, likeCount: String, title: String, imageUrl: String, sourceName: String, instructions: String, vegetarian: Bool, vegan: Bool){
         self.servings = servings
-        self.preparationMinutes = preparationMinutes
-        self.cookingMinutes = cookingMinutes
+        self.readyIn = readyIn
         self.likeCount = likeCount
         
         self.title = title
@@ -41,6 +40,7 @@ class Recipe{
         self.vegetarian = vegetarian
         self.vegan = vegan
     }
+    
     
     func appendIngredient(i: ingredient){
         ingredientList.append(i)

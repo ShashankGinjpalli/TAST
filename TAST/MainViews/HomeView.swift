@@ -9,8 +9,55 @@
 import SwiftUI
 
 struct HomeView: View {
+    
+    var recents = RecentRecipes()
+    var featured = FeaturedRecipe()
+    
     var body: some View {
-        Text("This is the Home")
+        NavigationView{
+            VStack(alignment: .leading) {
+                
+                Text("Featured")
+                    .font(.headline)
+                    .padding()
+                
+                
+                HStack {
+                    Spacer()
+                    Image("Logo")
+                    .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .shadow(radius: 10)
+                        .cornerRadius(15)
+                        
+                    Spacer()
+                }
+                .padding(.horizontal, 25)
+                .padding(.bottom, 25)
+                
+                            
+                
+               Text("Recent Recipes")
+                .font(.headline)
+                .padding()
+                
+                Spacer()
+               
+                
+                
+            
+                    
+    
+                    
+            }.navigationBarTitle(Text("Home"))
+            
+            
+            
+            
+          
+            
+            
+        }
     }
 }
 
