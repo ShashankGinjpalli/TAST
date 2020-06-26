@@ -7,12 +7,19 @@
 //
 
 import SwiftUI
-import URLImage
 
 struct HomeView: View {
     
+    @State var showInstructionView = false
+    
     var recents = RecentRecipes()
+    
     var featured = FeaturedRecipe()
+    
+    init() {
+        UINavigationBar.appearance().backgroundColor = UIColor(named: "AccentGreen")
+       
+    }
     
     var body: some View {
         NavigationView{
@@ -21,35 +28,48 @@ struct HomeView: View {
                 Text("Featured")
                     .font(.headline)
                     .padding()
-
                 
-                
-                HStack {
-                    Spacer()
-                    Image(uiImage: ((UIImage(data: Data())) ?? UIImage(named: "Logo"))!)
-                    .resizable()
-                        .aspectRatio(contentMode: .fit)
-                    .shadow(radius: 10)
-                     .cornerRadius(15)
+               Button(action: {
+                   self.showInstructionView.toggle()
+               }){
+                    HStack {
+                        Spacer()
+                        Image(uiImage: ((UIImage(data: self.featured.featured.recipeImage ?? Data())) ?? UIImage(named: "Logo"))!)
+                            .resizable()
+                            .renderingMode(.original)
+                            .aspectRatio(contentMode: .fit)
+                            .cornerRadius(15)
+                            .shadow(radius: 10)
                         
                         
-                    
-                    Spacer()
+                        Spacer()
+                    }
                 }
-                .padding(.horizontal, 25)
-                .padding(.bottom, 25)
+                    .padding(.horizontal, 25)
+                    Text("\(self.featured.featured.title!)")
+                        .padding(.bottom,20)
+                        .padding()
+                        .font(. headline)
+                    
                 
-
+                
                 
                 Text("Recent Recipes")
                     .font(.headline)
                     .padding()
                 
                 Spacer()
-                    
+                
                 
             }.navigationBarTitle(Text("Home"))
-        
+            
+            
+            
+        }.navigationBarHidden(true)
+            .padding(.bottom)
+        .sheet(isPresented: $showInstructionView) {
+            InstructionView(R: self.featured.featured)
+            
         }
     }
 }

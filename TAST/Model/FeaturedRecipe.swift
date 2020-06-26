@@ -14,11 +14,12 @@ class FeaturedRecipe {
     var featured = Recipe()
     
     init(){
-        getRandomRecipe()
+        
+        self.getRandomRecipe()
     }
     
     
-    let request = NSMutableURLRequest(url: NSURL(string: "https://api.spoonacular.com/recipes/random?apiKey=82c5b7acc77342f69584ee04330b5ec8&number=1")! as URL,
+    let request = NSMutableURLRequest(url: NSURL(string: "https://api.spoonacular.com/recipes/random?apiKey=82c5b7acc77342f69584ee04330b5ec8&number=1&limitLicense=true")! as URL,
                                       cachePolicy: .useProtocolCachePolicy,
                                       timeoutInterval: 10.0)
     
@@ -28,7 +29,7 @@ class FeaturedRecipe {
         
         let session = URLSession.shared
         
-        let semaphore = DispatchSemaphore(value: 0)
+        var semaphore = DispatchSemaphore(value: 0)
         
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
             if (error != nil) {
@@ -43,42 +44,45 @@ class FeaturedRecipe {
                 let results = jsonResult["recipes"] as! NSArray
                 let result = results[0] as! [String:AnyObject]
                 
+//                print(result["servings"])
                 
-                self.featured.servings = result["serving"] as? String
+                
+                self.featured.servings = "\(result["servings"]!)"
                 self.featured.instructions = result["instructions"] as? String
                 
-                self.featured.title = result["instructions"] as? String
+                self.featured.title = result["title"] as? String
                 self.featured.sourceName = result["sourceName"] as? String
-                self.featured.readyIn = result["readyInMinutes"] as? String
-                self.featured.likeCount = result["aggregateLikes"] as? String
+                self.featured.readyIn = "\(result["readyInMinutes"]!)"
+                self.featured.likeCount = "\(result["aggregateLikes"]!)"
                 
                 self.featured.imageUrl = result["image"] as? String
                 
-                if(result["vegetarian"] as? String == "NO"){
+                print("\(result["vegan"]!)")
+                print("\(result["vegetarian"]!)")
+                
+                if("\(result["vegetarian"]!)" == "0"){
                     self.featured.vegetarian = false
                 }else{
                     self.featured.vegetarian = true
                 }
                 
-                if(result["vegan"] as? String == "NO"){
+                if("\(result["vegan"]!)" == "0"){
                     self.featured.vegan = false
                 }else{
                     self.featured.vegan = true
                 }
                 
-                var imageUrl = "https://spoonacular.com/cdn/ingredients_100x100/"
-                
+                let imageUrl = "https://spoonacular.com/cdn/ingredients_100x100/"
+
                 for i in (result["extendedIngredients"] as! [Any]){
                     let ingredientInfo = i as! [String:AnyObject]
-                    var ingred = ingredient(iS: imageUrl + (ingredientInfo["image"] as? String ?? "not_found"), iN: ingredientInfo["originalString"] as? String ?? "Not Found", aisle: ingredientInfo["aisle"] as? String ?? "Not Found")
+                    let ingred = ingredient(iS: imageUrl + (ingredientInfo["image"] as? String ?? "not_found"), iN: ingredientInfo["originalString"] as? String ?? "Not Found", aisle: ingredientInfo["aisle"] as? String ?? "Not Found")
                     self.featured.appendIngredient(i: ingred)
                     
                 }
                 
                 print("Finished Loading Data")
-                
-        
-                
+
             }
             semaphore.signal()
             
@@ -86,7 +90,28 @@ class FeaturedRecipe {
         
         dataTask.resume()
         _ = semaphore.wait(timeout: DispatchTime.distantFuture)
+        
+        semaphore = DispatchSemaphore(value: 0)
+        print("Attempting to get featured image")
+        
+        let url = (URL(string: self.featured.imageUrl ?? "") ?? URL(string: ""))!
+        
+        print(self.featured.imageUrl!)
+        
+        let imageRequest = session.dataTask(with: url, completionHandler: { data, response, error -> Void in
+            if (error != nil) {
+                print(error!.localizedDescription)
+            }
+            
+            var err: NSError?
+            self.featured.recipeImage = data!
+            semaphore.signal()
+            print("overHere")
+            
+        })
+        imageRequest.resume()
+         _ = semaphore.wait(timeout: DispatchTime.distantFuture)
+        
     }
-    
-    
+
 }

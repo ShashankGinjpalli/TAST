@@ -28,12 +28,16 @@ struct QuickInfoCard: View {
                     
                     VStack(alignment: .leading){
                         
-                        Text(" 🍚 \(self.servings)")
+                      
+                        Text(" 🍚 \(self.servings) \n")
                             .foregroundColor(Color.green)
+         
                         
-                        Text(" ⏲ \(self.readyIn)")
+                        Text(" ⏲ \(self.readyIn) \n")
                             .foregroundColor(Color.green)
-                        Text(" 👍 \(self.likeCount)")
+                 
+                        
+                        Text(" 👍 \(self.likeCount) \n")
                             .foregroundColor(Color.green)
                         
                     }
