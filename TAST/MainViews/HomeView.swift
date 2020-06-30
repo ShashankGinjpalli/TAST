@@ -10,7 +10,10 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @State var showInstructionView = false
+    //    @State var showInstructionView = false
+    //    @State var showSearchView = false
+    @State var toggleModal = false
+    @State private var modalSelection = 1
     
     var recents = RecentRecipes()
     
@@ -24,70 +27,113 @@ struct HomeView: View {
     
     var body: some View {
         NavigationView{
-            VStack(alignment: .leading) {
-                
-                Text("Featured")
-                    .font(.headline)
-                    .padding()
-                
-                Button(action: {
-                    self.showInstructionView.toggle()
-                    self.recents.insertToRecent(x: self.featured.featured)
-                    var _ = IngredientImages(x: self.featured.featured.ingredientList)
-                        
-                }){
-                    HStack {
-                        Spacer()
-                        Image(uiImage: ((UIImage(data: self.featured.featured.recipeImage ?? Data())) ?? UIImage(named: "Logo"))!)
-                            .resizable()
-                            .renderingMode(.original)
-                            .aspectRatio(contentMode: .fit)
-                            .cornerRadius(15)
-                            .shadow(radius: 10)
-                        
-                        
-                        Spacer()
-                    }
-                }
-                .padding(.horizontal, 25)
-                Text("\(self.featured.featured.title ?? "Title Not Found")")
-                    .padding(.bottom,20)
-                    .padding()
-                    .font(. headline)
-                
-                
-                if(self.recents.getRecentCount() > 0){
-                    Text("Recents")
+            List() {
+                VStack(alignment: .leading) {
+                    
+                    Text("Featured")
                         .font(.headline)
                         .padding()
-                    ScrollView(.horizontal, showsIndicators: false){
+                    
+                    Button(action: {
+                        self.toggleModal.toggle()
+                        self.modalSelection = 1
+                        self.recents.insertToRecent(x: self.featured.featured)
+                        var _ = IngredientImages(x: self.featured.featured.ingredientList)
+                        
+                    }){
                         HStack {
-                            ForEach(self.recents.recent){
-                                recipe in
-                                Button(action: {
-                                    self.showInstructionView.toggle()
-                                    
-                                }){
-                                    HistoryCard(R: recipe)
+                            Spacer()
+                            Image(uiImage: ((UIImage(data: self.featured.featured.recipeImage ?? Data())) ?? UIImage(named: "Logo"))!)
+                                .resizable()
+                                .renderingMode(.original)
+                                .aspectRatio(contentMode: .fit)
+                                .cornerRadius(15)
+                                .shadow(radius: 10)
+                            
+                            
+                            Spacer()
+                        }
+                    }
+                    .padding(.horizontal, 25)
+                    Text("\(self.featured.featured.title ?? "Title Not Found")")
+                        .padding(.bottom,20)
+                        .padding()
+                        .font(. headline)
+                    
+                    
+                    if(self.recents.getRecentCount() > 0){
+                        Text("Recents")
+                            .font(.headline)
+                            .padding()
+                        ScrollView(.horizontal, showsIndicators: false){
+                            HStack {
+                                ForEach(self.recents.recent){
+                                    recipe in
+                                    Button(action: {
+                                        self.toggleModal.toggle()
+                                        self.modalSelection = 1
+                                    }){
+                                        HistoryCard(R: recipe)
+                                    }
                                 }
+                            }.listRowInsets(EdgeInsets())
+                        }.padding()
+                            .listRowInsets(EdgeInsets())
+                    }
+                    
+                    
+                    
+                    
+                    Text("Search")
+                        .font(.headline)
+                        .padding()
+                    
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            self.toggleModal.toggle()
+                            self.modalSelection = 2
+                            
+                        }){
+                            HStack{
+                                Image(systemName: "magnifyingglass")
+                                Text("Search")
+                                
                             }
-                        }.listRowInsets(EdgeInsets())
-                    }.padding()
-                        .listRowInsets(EdgeInsets())
+                        }.frame(width: 200, height: 50)
+                            .foregroundColor(.white)
+                            .font(.headline)
+                            .background(Color.blue)
+                            .cornerRadius(10)
+                        Spacer()
+                        
+                    }
+                    
+                    
+                    
+                    Spacer()
+                    
+                    
+                    
                 }
-
-                Spacer()
-
             }.navigationBarTitle(Text("Home"))
+            .onAppear {
+                UITableView.appearance().separatorStyle = .none
+            }
             
             
             
         }.navigationBarHidden(true)
             .padding(.bottom)
-            .sheet(isPresented: $showInstructionView) {
-                InstructionView(R: self.featured.featured)
-                
+            .sheet(isPresented: $toggleModal) {
+                if(self.modalSelection == 1){
+                    InstructionView(R: self.featured.featured)
+                }
+                if(self.modalSelection == 2){
+                    SearchView()
+                }
         }
+        
     }
 }
 

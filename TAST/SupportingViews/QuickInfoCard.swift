@@ -20,7 +20,7 @@ struct QuickInfoCard: View {
             HStack{
                 VStack(alignment: .leading){
                     Text("Quick Info")
-                        .font(.title)
+                        .font(.headline)
                         .fontWeight(.semibold)
                         .foregroundColor(Color.black)
                     

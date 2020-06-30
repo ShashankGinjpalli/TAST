@@ -19,8 +19,7 @@ struct HistoryCard: View {
                 .renderingMode(.original)
                 .aspectRatio(contentMode: .fit)
                 .cornerRadius(20)
-                .shadow(radius: 5)
-                .padding(.horizontal, 5)
+                .shadow(radius: 10)
                 .padding(.bottom, 5)
             
             
@@ -28,10 +27,11 @@ struct HistoryCard: View {
             
             Text(self.R.title ?? "Title Not Found")
                 .foregroundColor(.black)
-                .font(.footnote)
+                .fontWeight(.light)
                 .multilineTextAlignment(.leading)
             
-        }
+        }.padding(.horizontal)
+        .frame(width: 250)
         
     }
 }

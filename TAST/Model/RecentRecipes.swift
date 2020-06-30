@@ -14,7 +14,7 @@ class RecentRecipes{
     
     func insertToRecent(x: Recipe){
         if (!self.recent.contains(x)){
-            self.recent.append(x)
+            self.recent.insert(x, at: 0)
             print(self.getRecentCount())
         }
         

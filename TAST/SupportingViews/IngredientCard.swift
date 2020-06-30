@@ -33,11 +33,13 @@ struct IngredientCard: View {
                     .padding(.bottom, 5)
                 
                 Text(self.I.ingredientName ?? "Name Not Found")
-                    .font(.callout)
-                    .multilineTextAlignment(.leading)
+                    .fontWeight(.light)
+                    .multilineTextAlignment(.center)
+                
+//                    .multilineTextAlignment(.leading)
                 
                 
-            }.frame(width: 160)
+            }.frame(width: 175)
             
             
             
