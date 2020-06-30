@@ -12,10 +12,13 @@ import Foundation
 class FeaturedRecipe {
     
     var featured = Recipe()
+    var fail = false
     
     init(){
         
+        self.fail = false
         self.getRandomRecipe()
+        
     }
     
     
@@ -34,17 +37,29 @@ class FeaturedRecipe {
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
             if (error != nil) {
                 print("Error Request Timed Out")
+                self.fail = true
             } else {
                 var err: NSError?
                 let jsonResult = (try! JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers)) as! NSDictionary
                 if (err != nil) {
                     print("JSON Error \(err!.localizedDescription)")
+                    self.fail = true
                 }
                 
+                if("\(jsonResult["status"] ?? "")" == "failure"){
+                    print("Fail")
+                    self.fail = true
+                }
+                
+                if (!self.fail){
+                
                 let results = jsonResult["recipes"] as! NSArray
+                
+                
+                
                 let result = results[0] as! [String:AnyObject]
                 
-//                print(result["servings"])
+                //                print(result["servings"])
                 
                 
                 self.featured.servings = "\(result["servings"]!)"
@@ -73,7 +88,7 @@ class FeaturedRecipe {
                 }
                 
                 let imageUrl = "https://spoonacular.com/cdn/ingredients_100x100/"
-
+                
                 for i in (result["extendedIngredients"] as! [Any]){
                     let ingredientInfo = i as! [String:AnyObject]
                     let ingred = ingredient(iS: imageUrl + (ingredientInfo["image"] as? String ?? "not_found"), iN: ingredientInfo["originalString"] as? String ?? "Not Found", aisle: ingredientInfo["aisle"] as? String ?? "Not Found")
@@ -82,7 +97,7 @@ class FeaturedRecipe {
                 }
                 
                 print("Finished Loading Data")
-
+            }
             }
             semaphore.signal()
             
@@ -91,27 +106,30 @@ class FeaturedRecipe {
         dataTask.resume()
         _ = semaphore.wait(timeout: DispatchTime.distantFuture)
         
-        semaphore = DispatchSemaphore(value: 0)
-        print("Attempting to get featured image")
         
-        let url = (URL(string: self.featured.imageUrl ?? "") ?? URL(string: ""))!
+        if(!self.fail){
         
-        print(self.featured.imageUrl!)
-        
-        let imageRequest = session.dataTask(with: url, completionHandler: { data, response, error -> Void in
-            if (error != nil) {
-                print(error!.localizedDescription)
-            }
+            semaphore = DispatchSemaphore(value: 0)
+            print("Attempting to get featured image")
             
-            var err: NSError?
-            self.featured.recipeImage = data!
-            semaphore.signal()
-            print("overHere")
+            let url = (URL(string: self.featured.imageUrl ?? "") ?? URL(string: ""))!
             
-        })
-        imageRequest.resume()
-         _ = semaphore.wait(timeout: DispatchTime.distantFuture)
+            print(self.featured.imageUrl!)
+            
+            let imageRequest = session.dataTask(with: url, completionHandler: { data, response, error -> Void in
+                if (error != nil) {
+                    print(error!.localizedDescription)
+                }
+                
+                var err: NSError?
+                self.featured.recipeImage = data!
+                semaphore.signal()
+                
+            })
+            imageRequest.resume()
+            _ = semaphore.wait(timeout: DispatchTime.distantFuture)
+        }
         
     }
-
+    
 }

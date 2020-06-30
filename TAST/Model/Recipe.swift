@@ -9,7 +9,27 @@
 import Foundation
 
 
-class Recipe{
+class Recipe: Identifiable, Equatable{
+    
+    static func == (lhs: Recipe, rhs: Recipe) -> Bool {
+        if(lhs.title == rhs.title){
+            if(lhs.sourceName == rhs.sourceName){
+                if(lhs.imageUrl == rhs.imageUrl){
+                    return true
+                }
+            }else{
+                return false
+            }
+        }else{
+            return false
+        }
+        
+        return false
+    }
+    
+
+    
+    var id = UUID()
     var servings: String?
     var readyIn: String?
     var likeCount: String?
@@ -51,11 +71,15 @@ class Recipe{
     
 }
 
-class ingredient{
+class ingredient: Identifiable{
+    
+    var id = UUID()
     var imageString: String?
     var ingredientName: String?
     var aisle: String?
     var ingredientImage: Data?
+    
+    init(){}
     
     init(iS: String, iN: String, aisle: String){
         self.imageString = iS

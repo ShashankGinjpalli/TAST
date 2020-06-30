@@ -13,7 +13,11 @@ class RecentRecipes{
     var recent:[Recipe] = []
     
     func insertToRecent(x: Recipe){
-        self.recent.append(x)
+        if (!self.recent.contains(x)){
+            self.recent.append(x)
+            print(self.getRecentCount())
+        }
+        
     }
     
     func deleteFromRecent(index:Int){

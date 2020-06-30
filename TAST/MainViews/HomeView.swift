@@ -16,9 +16,10 @@ struct HomeView: View {
     
     var featured = FeaturedRecipe()
     
+    
     init() {
         UINavigationBar.appearance().backgroundColor = UIColor(named: "AccentGreen")
-       
+        
     }
     
     var body: some View {
@@ -29,9 +30,12 @@ struct HomeView: View {
                     .font(.headline)
                     .padding()
                 
-               Button(action: {
-                   self.showInstructionView.toggle()
-               }){
+                Button(action: {
+                    self.showInstructionView.toggle()
+                    self.recents.insertToRecent(x: self.featured.featured)
+                    var _ = IngredientImages(x: self.featured.featured.ingredientList)
+                        
+                }){
                     HStack {
                         Spacer()
                         Image(uiImage: ((UIImage(data: self.featured.featured.recipeImage ?? Data())) ?? UIImage(named: "Logo"))!)
@@ -45,31 +49,44 @@ struct HomeView: View {
                         Spacer()
                     }
                 }
-                    .padding(.horizontal, 25)
-                    Text("\(self.featured.featured.title!)")
-                        .padding(.bottom,20)
-                        .padding()
-                        .font(. headline)
-                    
-                
-                
-                
-                Text("Recent Recipes")
-                    .font(.headline)
+                .padding(.horizontal, 25)
+                Text("\(self.featured.featured.title ?? "Title Not Found")")
+                    .padding(.bottom,20)
                     .padding()
+                    .font(. headline)
                 
+                
+                if(self.recents.getRecentCount() > 0){
+                    Text("Recents")
+                        .font(.headline)
+                        .padding()
+                    ScrollView(.horizontal, showsIndicators: false){
+                        HStack {
+                            ForEach(self.recents.recent){
+                                recipe in
+                                Button(action: {
+                                    self.showInstructionView.toggle()
+                                    
+                                }){
+                                    HistoryCard(R: recipe)
+                                }
+                            }
+                        }.listRowInsets(EdgeInsets())
+                    }.padding()
+                        .listRowInsets(EdgeInsets())
+                }
+
                 Spacer()
-                
-                
+
             }.navigationBarTitle(Text("Home"))
             
             
             
         }.navigationBarHidden(true)
             .padding(.bottom)
-        .sheet(isPresented: $showInstructionView) {
-            InstructionView(R: self.featured.featured)
-            
+            .sheet(isPresented: $showInstructionView) {
+                InstructionView(R: self.featured.featured)
+                
         }
     }
 }

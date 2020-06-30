@@ -9,7 +9,12 @@
 import SwiftUI
 
 struct InstructionView: View {
+    
+    
+    
     var R:Recipe
+    
+    
     
     var body: some View {
         
@@ -18,10 +23,10 @@ struct InstructionView: View {
             VStack(alignment: .leading) {
                 HStack(alignment: .top){
                     
-                    if R.vegan! {
+                    if R.vegan ?? false {
                         BadgeView(badgeName: "vegan")
                     }
-                    if R.vegetarian!{
+                    if R.vegetarian ?? false{
                         BadgeView(badgeName: "vegetarian")
                         
                     } else{
@@ -38,10 +43,10 @@ struct InstructionView: View {
             
             VStack(alignment: .leading){
                 
-                Text(R.title!)
+                Text(R.title ?? "Error Getting Information")
                     .font(.title)
 
-                Text("by \(R.sourceName!)")
+                Text("by \(R.sourceName ?? "N/A")")
                     .fontWeight(.light)
 
                 HStack{
@@ -67,14 +72,9 @@ struct InstructionView: View {
 
                 ScrollView(.horizontal, showsIndicators: false){
                     HStack {
-                        ForEach(0..<20){ i in
-                            Image(systemName: "folder.fill")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame( height: 50)
-                                .padding(.horizontal)
-                            .shadow(radius: 5)
-                            
+                        ForEach(self.R.ingredientList){
+                            i in
+                            IngredientCard(I: i)
                         }
                     }.padding()
                 }
@@ -96,7 +96,7 @@ struct InstructionView: View {
                 
                 Spacer()
 
-                Text(R.instructions!)
+                Text(R.instructions ?? "")
                     .lineSpacing(1.7)
                     .font(.footnote)
 

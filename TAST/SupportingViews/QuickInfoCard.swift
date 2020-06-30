@@ -30,6 +30,7 @@ struct QuickInfoCard: View {
                         
                       
                         Text(" 🍚 \(self.servings) \n")
+                            .multilineTextAlignment(.leading)
                             .foregroundColor(Color.green)
          
                         
@@ -50,7 +51,7 @@ struct QuickInfoCard: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                     .cornerRadius(90)
-                    .frame(width:130)
+                    .frame(width:110)
                 .padding()
                     
                 
