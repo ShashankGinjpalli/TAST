@@ -10,8 +10,6 @@ import SwiftUI
 
 struct HomeView: View {
     
-    //    @State var showInstructionView = false
-    //    @State var showSearchView = false
     @State var toggleModal = false
     @State private var modalSelection = 1
     
@@ -27,7 +25,7 @@ struct HomeView: View {
     
     var body: some View {
         NavigationView{
-            List() {
+            ScrollView() {
                 VStack(alignment: .leading) {
                     
                     Text("Featured")
@@ -117,8 +115,8 @@ struct HomeView: View {
                     
                 }
             }.navigationBarTitle(Text("Home"))
-            .onAppear {
-                UITableView.appearance().separatorStyle = .none
+                .onAppear {
+                    UITableView.appearance().separatorStyle = .none
             }
             
             
