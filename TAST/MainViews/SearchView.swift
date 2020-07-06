@@ -10,6 +10,7 @@ import SwiftUI
 
 struct SearchView: View {
     @State var query:String = ""
+    @State var searchObj: SearchResults?
     
     var body: some View {
         
@@ -29,7 +30,7 @@ struct SearchView: View {
             HStack {
             Spacer()
             Button(action: {
-               
+                self.searchObj = SearchResults(s: self.query)
                 
             }){
                 HStack{
