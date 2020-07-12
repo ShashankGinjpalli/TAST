@@ -25,28 +25,47 @@ struct SearchView: View {
                 .overlay(
                     RoundedRectangle(cornerRadius: 15)
                         .stroke(Color.gray, lineWidth: 1)
-                )
+            )
             
             HStack {
-            Spacer()
-            Button(action: {
-                self.searchObj = SearchResults(s: self.query)
-                
-            }){
-                HStack{
-                    Image(systemName: "magnifyingglass")
-                    Text("Search")
+                Spacer()
+                Button(action: {
+                    self.searchObj = SearchResults(s: self.query)
                     
-                }
-            }.frame(width: 180, height: 50)
-                .foregroundColor(.white)
-                .font(.headline)
-                .background(Color.blue)
-                .cornerRadius(20)
-            Spacer()
+                }){
+                    HStack{
+                        Image(systemName: "magnifyingglass")
+                        Text("Search")
+                        
+                    }
+                }.frame(width: 180, height: 50)
+                    .foregroundColor(.white)
+                    .font(.headline)
+                    .background(Color.blue)
+                    .cornerRadius(20)
+                Spacer()
             }.padding(.vertical)
             
+            
+            
             Spacer()
+            
+            VStack(alignment: .center) {
+                List{
+                    ForEach(self.searchObj?.searchresultsDat ?? []){
+                        recipe in
+                        Button(action: {
+                            print("Button Clicked")
+                        }){
+                            HStack {
+                                Spacer()
+                                HistoryCard(R: recipe)
+                                Spacer()
+                            }
+                        }
+                    }
+                }
+            }
         }.padding()
     }
 }

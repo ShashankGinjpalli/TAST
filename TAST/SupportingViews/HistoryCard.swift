@@ -30,7 +30,7 @@ struct HistoryCard: View {
                 .fontWeight(.light)
                 .multilineTextAlignment(.leading)
             
-        }.padding(.horizontal)
+        }.padding()
         .frame(width: 250)
         
     }

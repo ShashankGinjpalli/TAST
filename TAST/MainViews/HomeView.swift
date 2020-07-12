@@ -17,10 +17,10 @@ struct HomeView: View {
     
     var featured = FeaturedRecipe()
     
-    
+
     init() {
         UINavigationBar.appearance().backgroundColor = UIColor(named: "AccentGreen")
-        
+
     }
     
     var body: some View {
@@ -54,9 +54,12 @@ struct HomeView: View {
                     }
                     .padding(.horizontal, 25)
                     Text("\(self.featured.featured.title ?? "Title Not Found")")
+                        .font(. headline)
+                        .fontWeight(.light)
                         .padding(.bottom,20)
                         .padding()
-                        .font(. headline)
+                        
+                        
                     
                     
                     if(self.recents.getRecentCount() > 0){
@@ -114,7 +117,9 @@ struct HomeView: View {
                     
                     
                 }
-            }.navigationBarTitle(Text("Home"))
+            }.navigationBarTitle(Text("TAST")
+                .fontWeight(.semibold)
+                .foregroundColor(Color.white))
                 .onAppear {
                     UITableView.appearance().separatorStyle = .none
             }

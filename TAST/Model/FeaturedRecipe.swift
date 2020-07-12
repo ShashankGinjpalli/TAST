@@ -119,7 +119,7 @@ class FeaturedRecipe {
             let imageRequest = session.dataTask(with: url, completionHandler: { data, response, error -> Void in
                 if (error != nil) {
                     print(error!.localizedDescription)
-                }
+                } 
                 
                 var err: NSError?
                 self.featured.recipeImage = data!

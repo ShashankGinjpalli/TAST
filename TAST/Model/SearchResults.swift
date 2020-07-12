@@ -90,7 +90,7 @@ class SearchResults{
         request.httpMethod = "GET"
         let session = URLSession.shared
         
-        let semaphore = DispatchSemaphore(value: 0)
+        var semaphore = DispatchSemaphore(value: 0)
         
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
             if (error != nil) {
@@ -104,16 +104,55 @@ class SearchResults{
                     
                 }
                 
-              
+                
                 
                 
                 let results = jsonResult as! NSArray
                 for i in results{
                     let result = i as! [String:AnyObject]
                     print(result)
+                    
+                    var searchResult = Recipe()
+                    
+                    searchResult.servings = "\(result["servings"]!)"
+                    searchResult.instructions = result["instructions"] as? String
+                    
+                    searchResult.title = result["title"] as? String
+                    searchResult.sourceName = result["sourceName"] as? String
+                    searchResult.readyIn = "\(result["readyInMinutes"]!)"
+                    searchResult.likeCount = "\(result["aggregateLikes"]!)"
+                    
+                    searchResult.imageUrl = result["image"] as? String
+                    
+                    print("\(result["vegan"]!)")
+                    print("\(result["vegetarian"]!)")
+                    
+                    if("\(result["vegetarian"]!)" == "0"){
+                        searchResult.vegetarian = false
+                    }else{
+                        searchResult.vegetarian = true
+                    }
+                    
+                    if("\(result["vegan"]!)" == "0"){
+                        searchResult.vegan = false
+                    }else{
+                        searchResult.vegan = true
+                    }
+                    
+                    let imageUrl = "https://spoonacular.com/cdn/ingredients_100x100/"
+                    
+                    for i in (result["extendedIngredients"] as! [Any]){
+                        let ingredientInfo = i as! [String:AnyObject]
+                        let ingred = ingredient(iS: imageUrl + (ingredientInfo["image"] as? String ?? "not_found"), iN: ingredientInfo["originalString"] as? String ?? "Not Found", aisle: ingredientInfo["aisle"] as? String ?? "Not Found")
+                        searchResult.appendIngredient(i: ingred)
+                        
+                    }
+                    
+                    self.searchresultsDat.append(searchResult)
+                    
                 }
                 
-
+                
                 
                 
                 print("Finished Loading Data")
@@ -126,7 +165,35 @@ class SearchResults{
         dataTask.resume()
         _ = semaphore.wait(timeout: DispatchTime.distantFuture)
         
-    
+        
+        
+        
+        for i in self.searchresultsDat{
+            semaphore = DispatchSemaphore(value: 0)
+            print("Attempting to get featured image")
+            
+            let url = (URL(string: i.imageUrl ?? "") ?? URL(string: ""))!
+            
+            print(i.imageUrl!)
+            
+            let imageRequest = session.dataTask(with: url, completionHandler: { data, response, error -> Void in
+                if (error != nil) {
+                    print(error!.localizedDescription)
+                }
+                
+                var err: NSError?
+                i.recipeImage = data!
+                semaphore.signal()
+                
+            })
+            imageRequest.resume()
+            _ = semaphore.wait(timeout: DispatchTime.distantFuture)
+        }
+        
+        print(searchresultsDat)
+        
+        
+        
     }
     
     func clearIDList(){
