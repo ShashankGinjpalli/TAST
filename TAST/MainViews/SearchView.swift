@@ -11,6 +11,9 @@ import SwiftUI
 struct SearchView: View {
     @State var query:String = ""
     @State var searchObj: SearchResults?
+    @State var toggleModal = false
+    @State var clickedRecipe:Recipe = Recipe()
+
     
     var body: some View {
         
@@ -55,7 +58,13 @@ struct SearchView: View {
                     ForEach(self.searchObj?.searchresultsDat ?? []){
                         recipe in
                         Button(action: {
+                            
+                            self.toggleModal.toggle()
                             print("Button Clicked")
+                            self.clickedRecipe = recipe
+                            var _ = IngredientImages(x: recipe.ingredientList)
+                            
+                            
                         }){
                             HStack {
                                 Spacer()
@@ -67,6 +76,9 @@ struct SearchView: View {
                 }
             }
         }.padding()
+            .sheet(isPresented: $toggleModal) {
+                InstructionView(R: self.clickedRecipe)
+        }
     }
 }
 
