@@ -14,7 +14,6 @@
 		4D3C98E9249D97350015B32C /* RecentRecipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3C98E8249D97340015B32C /* RecentRecipes.swift */; };
 		4D59538B24AD2D2B009E9629 /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59538A24AD2D2B009E9629 /* SearchResults.swift */; };
 		4D5ED42A249BF46500BD1EB8 /* QuickInfoCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5ED429249BF46500BD1EB8 /* QuickInfoCard.swift */; };
-		4D69C0FD24ABC0C600FA67FD /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D69C0FC24ABC0C600FA67FD /* SearchView.swift */; };
 		4D93A8F624AA84E400026D3E /* IngredientCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D93A8F524AA84E400026D3E /* IngredientCard.swift */; };
 		4DCEC5D624AA5BAB007C63C6 /* IngredientImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCEC5D524AA5BAB007C63C6 /* IngredientImages.swift */; };
 		4DECD4A7249ACA3C009AF638 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DECD4A6249ACA3C009AF638 /* AppDelegate.swift */; };
@@ -35,7 +34,6 @@
 		4D3C98E8249D97340015B32C /* RecentRecipes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentRecipes.swift; sourceTree = "<group>"; };
 		4D59538A24AD2D2B009E9629 /* SearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResults.swift; sourceTree = "<group>"; };
 		4D5ED429249BF46500BD1EB8 /* QuickInfoCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickInfoCard.swift; sourceTree = "<group>"; };
-		4D69C0FC24ABC0C600FA67FD /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		4D93A8F524AA84E400026D3E /* IngredientCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientCard.swift; sourceTree = "<group>"; };
 		4DCEC5D524AA5BAB007C63C6 /* IngredientImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientImages.swift; sourceTree = "<group>"; };
 		4DECD4A3249ACA3C009AF638 /* TAST.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TAST.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -119,7 +117,6 @@
 			children = (
 				4DECD4AD249ACA3C009AF638 /* HomeView.swift */,
 				4D11F87F249AF83400BC4B6D /* InstructionView.swift */,
-				4D69C0FC24ABC0C600FA67FD /* SearchView.swift */,
 			);
 			path = MainViews;
 			sourceTree = "<group>";
@@ -221,7 +218,6 @@
 				4DECD4AE249ACA3C009AF638 /* HomeView.swift in Sources */,
 				4DECD4A9249ACA3C009AF638 /* SceneDelegate.swift in Sources */,
 				4D2DB38A24A66C49001DC5C5 /* HistoryCard.swift in Sources */,
-				4D69C0FD24ABC0C600FA67FD /* SearchView.swift in Sources */,
 				4DECD4C1249ACD92009AF638 /* Recipe.swift in Sources */,
 				4D11F880249AF83400BC4B6D /* InstructionView.swift in Sources */,
 				4D93A8F624AA84E400026D3E /* IngredientCard.swift in Sources */,
