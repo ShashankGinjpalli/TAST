@@ -23,7 +23,7 @@ struct HomeView: View {
     
     
     init() {
-        UINavigationBar.appearance().backgroundColor = UIColor(named: "AccentGreen")
+//        UINavigationBar.appearance().backgroundColor = UIColor(named: "AccentGreen")
         
     }
     
@@ -51,8 +51,9 @@ struct HomeView: View {
                                 .renderingMode(.original)
                                 .aspectRatio(contentMode: .fit)
                                 .cornerRadius(15)
-                                .shadow(radius: 10)
-                            
+                            .shadow(color: Color( "ShadowDark"), radius: 5, x: 10, y: 10)
+                            .shadow(color: Color.white, radius: 5, x: -10, y: -10)
+
                             
                             Spacer()
                         }
@@ -96,12 +97,14 @@ struct HomeView: View {
                             .font(.headline)
                         TextField("Search", text: $query)
                             .cornerRadius(10)
-                            
-                            
                             .padding()
+                       
+                            
                             .overlay(
                                 RoundedRectangle(cornerRadius: 15)
                                     .stroke(Color.gray, lineWidth: 1)
+                                .shadow(color: Color( "ShadowDark"), radius: 5, x: 10, y: 10)
+                                                       .shadow(color: Color.white, radius: 5, x: -10, y: -10)
                         )
                         
                         HStack {
@@ -122,6 +125,8 @@ struct HomeView: View {
                                 .cornerRadius(20)
                             Spacer()
                         }.padding(.vertical)
+                        .shadow(color: Color( "ShadowDark"), radius: 5, x: 10, y: 10)
+                        .shadow(color: Color.white, radius: 5, x: -10, y: -10)
                         
                         
                         
@@ -165,9 +170,11 @@ struct HomeView: View {
                     
                     
                 }
-            }.navigationBarTitle(Text("TAST")
+            }.navigationBarTitle(
+                Text("TAST")
                 .fontWeight(.semibold)
-                .foregroundColor(Color.white))
+                .foregroundColor(Color.white)
+                )
                 .onAppear {
                     UITableView.appearance().separatorStyle = .none
             }
@@ -175,7 +182,7 @@ struct HomeView: View {
             
             
         }.navigationBarHidden(true)
-            .edgesIgnoringSafeArea(.bottom)
+            
             .padding(.bottom)
             .sheet(isPresented: $toggleModal) {
                 if(self.modalSelection == 1){

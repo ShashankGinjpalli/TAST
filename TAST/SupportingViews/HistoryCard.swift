@@ -19,7 +19,8 @@ struct HistoryCard: View {
                 .renderingMode(.original)
                 .aspectRatio(contentMode: .fit)
                 .cornerRadius(20)
-                .shadow(radius: 10)
+                .shadow(color: Color( "ShadowDark"), radius: 15, x: 10, y: 10)
+                .shadow(color: Color.white, radius: 15, x: -10, y: -10)
                 .padding(.bottom, 5)
             
             
@@ -32,7 +33,8 @@ struct HistoryCard: View {
             
         }.padding(.vertical)
             .padding(.horizontal,10)
-        .frame(width: 250)
+            .frame(width: 250)
+            
         
     }
 }

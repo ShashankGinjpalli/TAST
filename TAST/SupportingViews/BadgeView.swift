@@ -17,7 +17,8 @@ struct BadgeView: View {
             .aspectRatio(contentMode: .fit)
             .frame(height:50)
             .cornerRadius(90)
-            .shadow(radius: 5)
+            .shadow(color: Color( "ShadowDark"), radius: 5, x: 10, y: 10)
+            .shadow(color: Color.white, radius: 5, x: -10, y: -10)
             .padding(.vertical, 10)
             .padding(.leading, 10)
     }

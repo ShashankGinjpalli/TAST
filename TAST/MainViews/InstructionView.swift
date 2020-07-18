@@ -50,12 +50,13 @@ struct InstructionView: View {
                     Image(uiImage: ((UIImage(data: self.R.recipeImage ?? Data())) ?? UIImage(named: "Logo"))!)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .cornerRadius(25)
-                        .shadow(radius: 10)
+                        .cornerRadius(15)
+                        .shadow(color: Color( "ShadowDark"), radius: 5, x: 10, y: 10)
+                        .shadow(color: Color.white, radius: 5, x: -10, y: -10)
                         .foregroundColor(.white)
                         .listRowInsets(EdgeInsets())
                     
-                }.padding(.top)
+                }.padding(.vertical)
                 
             }.padding()
                 .listRowInsets(EdgeInsets())
@@ -80,7 +81,8 @@ struct InstructionView: View {
                 HStack {
                     Spacer()
                     QuickInfoCard(servings: self.R.servings ?? "Not Found", readyIn: self.R.readyIn ?? "Not Found" , likeCount: self.R.likeCount ?? "Not Found")
-                        .shadow(radius: 10)
+                        .shadow(color: Color( "ShadowDark"), radius: 15, x: 10, y: 10)
+                        .shadow(color: Color.white, radius: 15, x: -10, y: -10)
                     Spacer()
                 }.padding(.top)
             }
@@ -94,10 +96,22 @@ struct InstructionView: View {
                 
                 Spacer()
                 
-                Text(R.instructions ?? "Sorry No Instructions were found")
-                    .lineSpacing(1.7)
-                    .font(.footnote)
+                ZStack {
+                    Rectangle()
+                        .foregroundColor(Color.white)
+                    .cornerRadius(10)
+                        .padding()
+                    
+                    
+                    
+                    Text(R.instructions ?? "Sorry No Instructions were found")
+                        .lineSpacing(1.7)
+                        .font(.footnote)
+                        .padding()
                     .padding()
+                }
+                .shadow(color: Color( "ShadowDark"), radius: 15, x: 10, y: 10)
+                .shadow(color: Color.white, radius: 15, x: -10, y: -10)
                 
             }.listRowInsets(EdgeInsets())
                 .padding(.horizontal)
@@ -107,6 +121,7 @@ struct InstructionView: View {
         }
         .listRowInsets(EdgeInsets())
         .navigationBarHidden(true)
+            
             
         .onAppear {
             UITableView.appearance().separatorStyle = .none

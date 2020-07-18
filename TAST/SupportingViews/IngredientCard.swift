@@ -15,11 +15,11 @@ struct IngredientCard: View {
     var body: some View {
         ZStack{
             Rectangle()
-                .background(Color.white)
                 .foregroundColor(Color.white)
-                .frame(width: 230, height: 230)
+                .frame(width: 230)
                 .cornerRadius(20)
-                .shadow(radius: 10)
+                .shadow(color: Color( "ShadowDark"), radius: 10, x: 10, y: 10)
+                .shadow(color: Color.white, radius: 10, x: -10, y: -10)
                 .padding()
             
             VStack(alignment: .center){
@@ -35,8 +35,8 @@ struct IngredientCard: View {
                 Text(self.I.ingredientName ?? "Name Not Found")
                     .fontWeight(.light)
                     .multilineTextAlignment(.center)
-                
-//                    .multilineTextAlignment(.leading)
+                    .lineLimit(4)
+
                 
                 
             }.frame(width: 175)

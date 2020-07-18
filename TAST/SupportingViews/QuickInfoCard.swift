@@ -59,7 +59,7 @@ struct QuickInfoCard: View {
         }
         .frame(width: 320.0, height: 220.0)
         .background(Color.white)
-        .cornerRadius(20)
+        .cornerRadius(10)
         
     }
 }
