@@ -71,7 +71,7 @@ class Recipe: Identifiable, Equatable{
     
 }
 
-class ingredient: Identifiable{
+class ingredient: NSObject, Identifiable{
     
     var id = UUID()
     var imageString: String?
@@ -79,7 +79,7 @@ class ingredient: Identifiable{
     var aisle: String?
     var ingredientImage: Data?
     
-    init(){}
+    override init(){}
     
     init(iS: String, iN: String, aisle: String){
         self.imageString = iS
